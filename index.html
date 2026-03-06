@@ -445,10 +445,9 @@
 
       useEffect(() => {
         if (view === 'p3' && chatHistory.length === 0) {
-          const initialThought = answers.initialThought || "없음";
-          sendChatMessage('mid', `[시스템 지시: 학생이 처음에 생각한 내용("${initialThought}")과 방금 작성한 퀴즈 답변(${JSON.stringify(answers.quiz)})을 마음속으로 종합해봐. 절대 답변을 나열하지 마. 내용을 관통하는 단 하나의 통찰력 있는 질문을 던져서 대화를 시작해. 친구처럼 다정하게.]`);
+          sendChatMessage('mid');
         } else if (view === 'p5' && finalChatHistory.length === 0) {
-          sendChatMessage('final', `[시스템 지시: 학생이 방금 '마음 들여다보기'에서 적은 내용(${JSON.stringify(answers.check)})을 바탕으로 대화를 시작해. 나열하지 말고, 스스로 다짐한 내용을 구체적인 행동으로 옮길 수 있도록 돕는 하나의 질문을 던져줘.]`);
+          sendChatMessage('final');
         }
       }, [view]);
 
@@ -491,16 +490,14 @@
         if (idx < seq.length - 1) setView(seq[idx + 1]);
       };
 
-      const sendChatMessage = async (type = 'mid', initialMsg = null) => {
-        const msg = initialMsg || chatInput.trim();
-        if (!msg) return;
-        if (!initialMsg) setChatInput('');
-
+      const sendChatMessage = async (type = 'mid') => {
+        const msg = chatInput.trim();
         const history = type === 'mid' ? chatHistory : finalChatHistory;
         const setHistory = type === 'mid' ? setChatHistory : setFinalChatHistory;
 
         let updatedHistory = history;
-        if (!initialMsg && msg) {
+        if (msg) {
+          setChatInput('');
           updatedHistory = [...history, { role: 'user', content: msg }];
           setHistory(updatedHistory);
         }
@@ -514,44 +511,29 @@
         }));
 
         const userMsgCount = updatedHistory.filter(h => h.role === 'user').length;
-        let coreRules = "", finalInstruction = "";
+        let rules = "";
 
         if (userMsgCount >= 7) {
-          coreRules = `[핵심 대화 원칙 - 마무리 단계]
-1. 절대 질문 금지: 어떠한 형태의 질문(?로 끝나는 문장)도 절대 금지야.
-2. 요약과 격려: 학생이 지금까지 대답한 내용들을 종합해서 핵심을 1~2문장으로 멋지게 요약해줘.
-3. 단호한 종료: "충분히 고민했네. 이제 다음 단계로 넘어가자!" 와 같이 명확하게 마무리해.`;
-          finalInstruction = `[최우선 지시] 상담이 종료되었어. 전체 대화를 요약하고 깔끔하게 마무리해줘. 꼬리를 무는 질문은 절대 안 돼.`;
+          rules = "마무리 단계: 질문 금지. 학생 답변을 1~2문장으로 요약하고 따뜻하게 마무리해.";
         } else {
-          coreRules = `[핵심 대화 원칙]
-상대는 중학생이야. 질문의 범위가 너무 넓으면 어디서 답해야 할지 몰라서 막막해져. 반드시 아래 원칙을 지켜.
-1. 좁고 구체적인 질문: "어떻게 생각해?" 같은 광범위한 질문은 금지. 반드시 상황, 경험, 선택지를 제시해서 대답하기 쉽게 만들어.
-2. 학생의 답변에서 출발: 반드시 학생이 방금 한 말들을 고려해서 거기서 이어지는 질문을 해.
-3. 난이도 조절: 학생이 "모르겠어", "어려워" 하면 즉시 더 쉬운 예시나 "A야 B야?" 같은 선택지를 줘.
-4. 단일 질문: 질문은 딱 하나만. 두 개 이상 절대 금지.
-5. 카톡 말투: 1~2문장, 친근하고 친절한 반말로.`;
-          if (type === 'mid' && userMsgCount === 0) {
-            finalInstruction = `[첫 대화 시작 - 중요 주의사항]
-퀴즈 답변 중 q1("${answers.quiz.q1}")은 학생이 '방금 읽은 내용 중 마음에 든 문장'을 고른 것이야. 이건 학생이 스스로 깨달은 것이 아니라 그냥 글에서 고른 것이므로, 이미 이해했다거나 대단한 생각을 했다는 식으로 해석하면 안 돼.
-대신 이렇게 시작해: 학생이 고른 그 문장이 왜 마음에 들었는지, 혹은 q2나 q3 답변 내용 중 하나를 골라 거기서 자연스럽게 이어지는 구체적인 질문 하나를 던져. 칭찬으로 시작하지 말고 바로 질문으로 시작해.`;
-          } else if (type === 'final' && userMsgCount === 0) {
-            finalInstruction = `[마무리 대화 시작] '마음 점검' 답변(${JSON.stringify(answers.check)}) 중 가장 구체적인 내용 하나를 골라, 그걸 실제로 어떻게 실천할지 도와주는 좁고 쉬운 질문 하나를 던져줘. 너무 추상적이거나 어른스러운 질문은 금지야.`;
-          }
+          rules = "상대는 중학생. 질문은 좁고 구체적으로(상황/경험/선택지 제시). 넓은 질문 금지. 질문 딱 하나. 1~2문장 카톡 반말.";
         }
 
-        const systemPrompt = `너는 중학생을 위한 통찰력 있고 따뜻한 멘토야. 친근한 반말을 사용해(카톡하듯 1~2문장).
-본인을 '나'라고 칭하고, '수석', '김수석', '선생님' 같은 호칭은 절대 스스로 쓰지 마.
+        const systemPrompt = `너는 중학생 멘토. 친근한 반말(1~2문장). '나'라 칭하고 '수석'/'김수석'/'선생님' 호칭 금지. ${rules}`;
 
-[데이터]
-1. Step 0 (학습 전 초기 생각): "${answers.initialThought}"
-2. Step 2 (학습 후 퀴즈 답변 - q1은 글에서 마음에 든 문장을 고른 것, q2·q3은 학생 자신의 생각): ${JSON.stringify(answers.quiz)}
-${type === 'final' ? `3. Step 4 (마음 점검): ${JSON.stringify(answers.check)}` : ''}
+        let requestMessages;
+        if (apiMessages.length === 0) {
+          let dataMsg;
+          if (type === 'mid') {
+            dataMsg = `[${selectedKeyword}] 초기생각: "${answers.initialThought}". 퀴즈답변 q1(마음에든문장)="${answers.quiz.q1}", q2="${answers.quiz.q2}", q3="${answers.quiz.q3}". q1은 글에서 고른 것(깨달음 아님). q2나 q3에서 이어지는 구체적 질문 하나로 대화 시작해.`;
+          } else {
+            dataMsg = `[${selectedKeyword}] 마음점검 q1="${answers.check.q1}", q2="${answers.check.q2}", 실천다짐="${answers.check.action}". 가장 구체적인 답변에서 이어지는 쉬운 질문 하나로 시작해.`;
+          }
+          requestMessages = [{ role: 'user', parts: [{ text: dataMsg }] }];
+        } else {
+          requestMessages = apiMessages;
+        }
 
-${coreRules}
-현재 상황: [${selectedKeyword}]에 대한 ${type === 'mid' ? '중간 점검 대화' : '마무리 실천 대화'}.
-${finalInstruction}`;
-
-        const requestMessages = apiMessages.length > 0 ? apiMessages : [{ role: 'user', parts: [{ text: '대화를 시작해줘.' }] }];
         const response = await callGemini(systemPrompt, requestMessages);
         setHistory([...updatedHistory, { role: 'assistant', content: response }]);
         setIsTyping(false);
