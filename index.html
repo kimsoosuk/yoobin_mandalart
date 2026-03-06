@@ -17,9 +17,36 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
       background: #FDFDFF;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #root {
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 640px) {
+      .chat-wrapper {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      .chat-input-row {
+        gap: 8px !important;
+      }
+      .chat-messages {
+        padding: 12px !important;
+      }
+      .chat-input-box {
+        padding: 10px 14px !important;
+        font-size: 14px !important;
+      }
     }
 
     @keyframes fadeIn {
@@ -112,7 +139,7 @@
     // ⚙️ 설정 - Worker URL
     // ============================================================
     const WORKER_URL = "https://science-teacher.kimsoosuk1.workers.dev/";
-    const MODEL_NAME = "gemini-3.1-flash-lite-preview";
+    const MODEL_NAME = "gemini-2.0-flash-lite";
 
     // ============================================================
     // API Helper - Worker 프록시를 통해 Gemini 호출
@@ -701,9 +728,9 @@ ${finalInstruction}`;
         const isFinished = userMessageCount >= 7 && history.length > 0 && history[history.length - 1].role === 'assistant';
 
         return (
-          <div className="anim-zoom" style={{ maxWidth: 720, margin: '0 auto', height: 'calc(100vh - 120px)', minHeight: 500, display: 'flex', flexDirection: 'column', background: 'white', borderRadius: 40, boxShadow: '0 8px 40px rgba(0,0,0,0.12)', overflow: 'hidden', border: '1px solid #f1f5f9' }}>
+          <div className="anim-zoom chat-wrapper" style={{ maxWidth: 720, margin: '0 auto', height: 'calc(100vh - 120px)', minHeight: 500, display: 'flex', flexDirection: 'column', background: 'white', borderRadius: 40, boxShadow: '0 8px 40px rgba(0,0,0,0.12)', overflow: 'hidden', border: '1px solid #f1f5f9' }}>
             {/* Header */}
-            <div style={{ padding: '16px 24px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 16, background: 'white', boxShadow: '0 1px 4px rgba(0,0,0,0.04)', flexShrink: 0 }}>
+            <div style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 12, background: 'white', boxShadow: '0 1px 4px rgba(0,0,0,0.04)', flexShrink: 0 }}>
               <div style={{ width: 48, height: 48, borderRadius: 20, overflow: 'hidden', border: '2px solid #dbeafe', flexShrink: 0 }}>
                 <img src={KIM_SUSEOK_PROFILE} alt="김수석" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
@@ -716,21 +743,21 @@ ${finalInstruction}`;
               </div>
             </div>
             {/* Messages */}
-            <div ref={chatContainerRef} style={{ flex: 1, overflowY: 'auto', padding: 24, display: 'flex', flexDirection: 'column', gap: 20, background: '#f8fafc' }}>
+            <div ref={chatContainerRef} className="chat-messages" style={{ flex: 1, overflowY: 'auto', padding: 16, display: 'flex', flexDirection: 'column', gap: 16, background: '#f8fafc' }}>
               {history.map((chat, i) => (
-                <div key={i} className="anim-slide" style={{ display: 'flex', justifyContent: chat.role === 'user' ? 'flex-end' : 'flex-start', alignItems: 'flex-start', gap: 12 }}>
+                <div key={i} className="anim-slide" style={{ display: 'flex', justifyContent: chat.role === 'user' ? 'flex-end' : 'flex-start', alignItems: 'flex-start', gap: 8 }}>
                   {chat.role === 'assistant' && (
-                    <div style={{ width: 36, height: 36, borderRadius: 16, overflow: 'hidden', border: '2px solid white', background: 'white', flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+                    <div style={{ width: 32, height: 32, borderRadius: 14, overflow: 'hidden', border: '2px solid white', background: 'white', flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
                       <img src={KIM_SUSEOK_PROFILE} alt="K" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                   )}
-                  <div style={{ maxWidth: '82%', padding: '12px 20px', borderRadius: chat.role === 'user' ? '24px 4px 24px 24px' : '4px 24px 24px 24px', fontSize: 15, fontWeight: 500, lineHeight: 1.6, boxShadow: '0 2px 8px rgba(0,0,0,0.06)', background: chat.role === 'user' ? '#3b82f6' : 'white', color: chat.role === 'user' ? 'white' : '#334155', border: chat.role === 'assistant' ? '1px solid #f1f5f9' : 'none' }}>
+                  <div style={{ maxWidth: '78%', padding: '10px 16px', borderRadius: chat.role === 'user' ? '20px 4px 20px 20px' : '4px 20px 20px 20px', fontSize: 14, fontWeight: 500, lineHeight: 1.6, boxShadow: '0 2px 8px rgba(0,0,0,0.06)', background: chat.role === 'user' ? '#3b82f6' : 'white', color: chat.role === 'user' ? 'white' : '#334155', border: chat.role === 'assistant' ? '1px solid #f1f5f9' : 'none' }}>
                     {chat.content}
                   </div>
                 </div>
               ))}
               {isTyping && (
-                <div style={{ display: 'flex', justifyContent: 'flex-start', paddingLeft: 48 }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', paddingLeft: 40 }}>
                   <div className="anim-pulse" style={{ background: 'white', padding: '8px 16px', borderRadius: 999, fontSize: 11, color: '#3b82f6', fontWeight: 900, boxShadow: '0 2px 8px rgba(59,130,246,0.1)', border: '1px solid #dbeafe' }}>
                     선생님이 입력 중...
                   </div>
@@ -738,27 +765,27 @@ ${finalInstruction}`;
               )}
             </div>
             {/* Input */}
-            <div style={{ padding: 16, background: 'white', flexShrink: 0 }}>
+            <div style={{ padding: '8px 12px 12px', background: 'white', flexShrink: 0 }}>
               {!isFinished && (
-                <div style={{ textAlign: 'center', fontSize: 12, color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>
-                  7번의 대화 후 다음 단계가 열려요 (현재 {userMessageCount}/7)
+                <div style={{ textAlign: 'center', fontSize: 11, color: '#94a3b8', fontWeight: 700, marginBottom: 6 }}>
+                  7번의 대화 후 다음 단계가 열려요 ({userMessageCount}/7)
                 </div>
               )}
-              <div style={{ display: 'flex', gap: 12 }}>
-                <input type="text" style={{ flex: 1, padding: '14px 20px', background: '#f1f5f9', borderRadius: 24, border: 'none', outline: 'none', fontSize: 15, fontWeight: 500, color: isFinished ? '#94a3b8' : '#334155', fontFamily: 'inherit' }}
+              <div className="chat-input-row" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <input type="text" className="chat-input-box" style={{ flex: 1, minWidth: 0, padding: '12px 16px', background: '#f1f5f9', borderRadius: 20, border: 'none', outline: 'none', fontSize: 14, fontWeight: 500, color: isFinished ? '#94a3b8' : '#334155', fontFamily: 'inherit' }}
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyPress={(e) => handleKeyPress(e, type)}
-                  placeholder={isFinished ? "대화가 종료되었습니다." : "선생님에게 메시지 보내기..."}
+                  placeholder={isFinished ? "대화가 종료되었습니다." : "메시지 보내기..."}
                   disabled={isFinished} />
                 <button onClick={() => sendChatMessage(type)} disabled={isFinished}
-                  style={{ width: 52, height: 52, borderRadius: 20, background: isFinished ? '#e2e8f0' : '#3b82f6', color: 'white', border: 'none', cursor: isFinished ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: isFinished ? 'none' : '0 4px 12px rgba(59,130,246,0.3)', transition: 'all 0.2s' }}>
-                  <Send size={20} />
+                  style={{ width: 46, height: 46, borderRadius: 16, background: isFinished ? '#e2e8f0' : '#3b82f6', color: 'white', border: 'none', cursor: isFinished ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: isFinished ? 'none' : '0 4px 12px rgba(59,130,246,0.3)', transition: 'all 0.2s' }}>
+                  <Send size={18} />
                 </button>
               </div>
             </div>
             {isFinished && (
-              <div className="anim-slide" style={{ padding: '0 16px 16px', background: 'white', flexShrink: 0 }}>
+              <div className="anim-slide" style={{ padding: '0 12px 12px', background: 'white', flexShrink: 0 }}>
                 <button onClick={handleNext}
                   style={{ width: '100%', padding: '14px 0', background: '#0f172a', color: 'white', borderRadius: 20, fontWeight: 700, fontSize: 14, border: 'none', cursor: 'pointer', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
                   충분히 대화했어! 다음 단계로 가기
@@ -910,7 +937,7 @@ ${finalInstruction}`;
       };
 
       return (
-        <div style={{ minHeight: '100vh', background: '#FDFDFF', padding: '8px 8px', overflowX: 'hidden' }}>
+        <div style={{ minHeight: '100%', background: '#FDFDFF', padding: '8px 8px', overflowX: 'hidden' }}>
           {/* Header */}
           <header style={{ maxWidth: 960, margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 24, padding: '0 16px' }}>
             {view !== 'home' && view !== 'report' && (
