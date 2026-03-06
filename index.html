@@ -166,17 +166,25 @@
         contents.push({ role: 'user', parts: [{ text: '계속해줘.' }] });
       }
 
-      const payload = {
-        model: MODEL_NAME,
-        contents,
-        systemInstruction: systemPrompt
-      };
-
       const MAX_RETRIES = 1; // 503 시 1회만 재시도 (총 30~60초 제한)
-      const RETRYABLE_STATUSES = [429, 503];
+      const RETRYABLE_STATUSES = [429, 503, 500];
+      
+      let currentModel = MODEL_NAME;
 
       for (let i = 0; i <= MAX_RETRIES; i++) {
         try {
+          // 재시도 시 안정적인 모델로 폴백
+          if (i > 0 && currentModel.includes('3.1')) {
+            currentModel = 'gemini-2.5-flash';
+            console.warn(`[API 지연 방지] 안정적인 ${currentModel} 모델로 변경하여 재시도합니다.`);
+          }
+
+          const payload = {
+            model: currentModel,
+            contents,
+            systemInstruction: systemPrompt
+          };
+
           const response = await fetch(WORKER_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
