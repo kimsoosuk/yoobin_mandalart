@@ -149,12 +149,19 @@
     // API Helper - Worker 프록시를 통해 Gemini 호출
     // ============================================================
     async function callGemini(systemPrompt, messages) {
-      // 멘티턴 대화 형식으로 변환 (단일 텍스트 덕어리 X)
+      // 멀티턴 대화 형식으로 변환
       let contents = messages.map(m => ({
         role: m.role === 'user' ? 'user' : 'model',
         parts: [{ text: m.parts[0].text }]
       }));
-      // Gemini 규칙: 마지막 메시지는 user여야 함
+
+      // Gemini 규칙 1: 첫 번째 메시지는 반드시 user여야 함
+      // (AI가 먼저 말하는 구조라 history가 model로 시작할 수 있음 → 앞부분 제거)
+      while (contents.length > 0 && contents[0].role === 'model') {
+        contents.shift();
+      }
+
+      // Gemini 규칙 2: 비어있거나 마지막이 model이면 dummy user 추가
       if (contents.length === 0 || contents[contents.length - 1].role === 'model') {
         contents.push({ role: 'user', parts: [{ text: '계속해줘.' }] });
       }
