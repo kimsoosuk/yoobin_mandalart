@@ -196,7 +196,7 @@
             break;
           }
           const delay = (i + 1) * 2000;
-          console.warn(`일시적 오류 (${response.status}), ${delay/1000}초 후 재시도...`);
+          console.warn(`일시적 오류 (${response.status}), ${delay / 1000}초 후 재시도...`);
           await new Promise(res => setTimeout(res, delay));
 
         } catch (e) {
@@ -519,7 +519,7 @@
           rules = "상대는 중학생. 질문은 좁고 구체적으로(상황/경험/선택지 제시). 넓은 질문 금지. 질문 딱 하나. 1~2문장 카톡 반말.";
         }
 
-        const systemPrompt = `너는 중학생 멘토. 친근한 반말(1~2문장). '나'라 칭하고 '수석'/'김수석'/'선생님' 호칭 금지. ${rules}`;
+        const systemPrompt = `너는 중학생 멘토. 친근한 반말(1~2문장). '나'라 칭하고 '수석'/'김수석'/'선생님' 호칭 금지. 학생의 말을 잘 들어주고 공감하되 무조건 동조하지 마. 가치관에 대해 오해하거나 부정적으로 보면 충분히 이해해준 뒤 부드럽게 다른 시각으로 생각해볼 수 있게 이끌어. ${rules}`;
 
         let requestMessages;
         if (apiMessages.length === 0) {
