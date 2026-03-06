@@ -172,7 +172,7 @@
         systemInstruction: systemPrompt
       };
 
-      const MAX_RETRIES = 2;
+      const MAX_RETRIES = 1; // 503 시 1회만 재시도 (총 30~60초 제한)
       const RETRYABLE_STATUSES = [429, 503];
 
       for (let i = 0; i <= MAX_RETRIES; i++) {
@@ -437,6 +437,9 @@
       const [impIndex, setImpIndex] = useState(-1);
       const [showGuide, setShowGuide] = useState(true);
       const chatContainerRef = useRef(null);
+      const isMidStarted = useRef(false);
+      const isFinalStarted = useRef(false);
+      const isReviewStarted = useRef(false);
 
       const scrollToBottom = () => {
         if (chatContainerRef.current) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -444,15 +447,20 @@
       useEffect(() => { scrollToBottom(); }, [chatHistory, finalChatHistory, isTyping]);
 
       useEffect(() => {
-        if (view === 'p3' && chatHistory.length === 0) {
+        if (view === 'p3' && chatHistory.length === 0 && !isMidStarted.current) {
+          isMidStarted.current = true;
           sendChatMessage('mid');
-        } else if (view === 'p5' && finalChatHistory.length === 0) {
+        } else if (view === 'p5' && finalChatHistory.length === 0 && !isFinalStarted.current) {
+          isFinalStarted.current = true;
           sendChatMessage('final');
         }
       }, [view]);
 
       useEffect(() => {
-        if (view === 'report' && !suseokReview) generateFinalReview();
+        if (view === 'report' && !suseokReview && !isReviewStarted.current) {
+          isReviewStarted.current = true;
+          generateFinalReview();
+        }
       }, [view]);
 
       useEffect(() => {
@@ -477,6 +485,9 @@
       };
 
       const startSession = (keyword) => {
+        isMidStarted.current = false;
+        isFinalStarted.current = false;
+        isReviewStarted.current = false;
         setSelectedKeyword(keyword);
         setView('p0');
         setAnswers({ initialThought: '', quiz: { q1: '', q2: '', q3: '' }, check: { q1: '', q2: '', action: '' }, summary: { def: '', benefit: '' } });
