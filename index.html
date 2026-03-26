@@ -21,7 +21,6 @@
       --accent: #7a5c1e;
       --accent-warm: #b8922e;
       --accent-glow: rgba(184, 146, 46, 0.12);
-      --red-soft: #a63d2f;
       --cover: #2c2218;
       --cover-light: #4a3c2a;
       --spine: #1e180f;
@@ -47,8 +46,7 @@
 
     body {
       background: #8a7e6e;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E"),
-        radial-gradient(ellipse at 40% 30%, #9e9282 0%, #7a7060 60%, #605848 100%);
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E"), radial-gradient(ellipse at 40% 30%, #9e9282 0%, #7a7060 60%, #605848 100%);
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
@@ -58,7 +56,7 @@
       color: var(--ink);
       overflow-x: hidden;
       overflow-y: auto;
-      padding: 20px;
+      padding: 20px
     }
 
     #root {
@@ -77,7 +75,7 @@
       background: var(--cover);
       border-radius: 4px 10px 10px 4px;
       padding: 6px 6px 6px 0;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.25), 0 16px 48px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.25), 0 16px 48px rgba(0, 0, 0, 0.35)
     }
 
     .book-spine {
@@ -86,7 +84,7 @@
       background: linear-gradient(90deg, var(--spine), var(--cover-light) 40%, var(--cover) 70%, var(--cover-light));
       border-radius: 4px 0 0 4px;
       box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.4);
-      position: relative;
+      position: relative
     }
 
     .book-spine::after {
@@ -108,7 +106,7 @@
       overflow: hidden;
       position: relative;
       box-shadow: inset 2px 0 8px rgba(0, 0, 0, 0.06);
-      min-height: 0;
+      min-height: 0
     }
 
     .book-pages::before {
@@ -145,7 +143,7 @@
       transform: translateX(-50%);
       background: linear-gradient(90deg, transparent, rgba(30, 24, 15, 0.04) 15%, rgba(30, 24, 15, 0.09) 35%, rgba(30, 24, 15, 0.16) 50%, rgba(30, 24, 15, 0.09) 65%, rgba(30, 24, 15, 0.04) 85%, transparent);
       z-index: 2;
-      pointer-events: none;
+      pointer-events: none
     }
 
     .book-gutter::after {
@@ -175,7 +173,7 @@
       z-index: 5;
       min-height: 0;
       display: flex;
-      flex-direction: column;
+      flex-direction: column
     }
 
     .page {
@@ -184,7 +182,7 @@
       overflow-y: auto;
       scrollbar-width: none;
       display: flex;
-      flex-direction: column;
+      flex-direction: column
     }
 
     .page::-webkit-scrollbar {
@@ -205,7 +203,7 @@
       font-family: var(--font-serif);
       font-size: 0.72rem;
       color: var(--ink-faint);
-      pointer-events: none;
+      pointer-events: none
     }
 
     .page-left .page-num {
@@ -348,7 +346,7 @@
       outline: none;
       transition: border-color 0.2s;
       background-image: repeating-linear-gradient(transparent, transparent 24px, rgba(44, 36, 22, 0.08) 24px, rgba(44, 36, 22, 0.08) 25px);
-      background-size: 100% 25px;
+      background-size: 100% 25px
     }
 
     .answer-textarea:focus {
@@ -397,7 +395,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: all 0.25s;
-      box-shadow: 0 2px 8px rgba(122, 92, 30, 0.2);
+      box-shadow: 0 2px 8px rgba(122, 92, 30, 0.2)
     }
 
     .submit-btn:hover {
@@ -432,7 +430,7 @@
       justify-content: center;
       flex-shrink: 0;
       transition: all 0.2s;
-      font-size: 0.7rem;
+      font-size: 0.7rem
     }
 
     .click-btn:hover {
@@ -797,7 +795,7 @@
       }
 
       .page {
-        padding: 28px 24px 48px;
+        padding: 28px 24px 48px
       }
 
       .mob-nav {
@@ -822,13 +820,11 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const { useState, useEffect, useRef, useMemo } = React;
-
     const W = "https://mandalart.kimsoosuk1.workers.dev";
     const MODEL = "gemini-3.1-flash-lite-preview";
     const KW = "겸손";
     const PROF_IMG = "https://res.cloudinary.com/dms5vyofw/image/upload/v1766382489/%E1%84%80%E1%85%B5%E1%86%B7%E1%84%89%E1%85%AE%E1%84%89%E1%85%A5%E1%86%A8%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%8F%E1%85%A9%E1%86%AB_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB_%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%85%E1%85%A51_snx7la.png";
     const RH = () => <><div className="running-header">공부 체질 만들기</div><div className="page-header-line" /></>;
-
     const DATA = {
       subtitle: "공부 체질 만들기",
       definition: ["겸손은 스스로를 낮추거나 자신을 작게 보는 태도가 아닙니다.", "잘한 것을 부정하는 것도 아닙니다.", "겸손은 지금의 결과가 전부가 아니라는 것을 아는 태도입니다.", "잘됐을 때도 우연과 도움을 인정하고, 안 됐을 때도 자신을 지금의 결과로 평가하지 않는 균형입니다.", "겸손은 자신감이 없는 상태가 아니라 자신을 과대평가하지 않는 힘입니다."],
@@ -837,31 +833,19 @@
       check: [{ id: 'q1', label: "잘 됐을 때 '내 실력이야!'라고 느낀 순간과, '운이 좋았나?' 싶었던 순간은?" }, { id: 'q2', label: "결과가 별로였을 때 스스로에게 어떤 말을 했어?" }, { id: 'action', label: "앞으로 뭔가 잘 됐을 때 자신에게 해주고 싶은 한마디는?" }],
     };
 
-    // ── Improved system prompt builder ──
     function buildSysPrompt(kwDef, userCount, curLim) {
-      if (userCount >= curLim) {
-        return `너는 중학생의 멘토. 마무리 단계야. 더 이상 질문하지 마. 학생이 대화를 통해 보여준 생각의 변화와 성장을 1~2문장으로 따뜻하게 정리해줘. 친근한 반말. 별표(*) 금지.`;
-      }
+      if (userCount >= curLim) return `너는 중학생의 멘토. 마무리 단계야. 더 이상 질문하지 마. 학생이 대화를 통해 보여준 생각의 변화와 성장을 1~2문장으로 따뜻하게 정리해줘. 친근한 반말. 별표(*) 금지.`;
       return `너는 중학생의 멘토이자 친한 형/누나 같은 존재야. 아래 규칙을 반드시 지켜.
-
 [대화 규칙]
 1. 한 번의 답변에 질문은 반드시 "하나만". 절대 두 개 이상 질문하지 마.
-2. "네/아니오"로 답할 수 있는 닫힌 질문(closed question) 절대 금지. 예: "그런 경험 있어?" (X) → "그때 어떤 기분이 들었어?" (O)
-3. 항상 학생의 "생각, 느낌, 경험"을 묻는 열린 질문(open question)만 해. "어떤~", "어떻게~", "왜~", "언제~" 같은 의문사로 시작하는 질문을 사용해.
-4. 같은 주제에 대해 깊이 파고드는 질문은 최대 3번까지만. 3번 물었으면 새로운 각도의 질문으로 자연스럽게 전환해.
+2. "네/아니오"로 답할 수 있는 닫힌 질문(closed question) 절대 금지.
+3. 항상 학생의 "생각, 느낌, 경험"을 묻는 열린 질문만 해. "어떤~","어떻게~","왜~","언제~" 같은 의문사 사용.
+4. 같은 주제에 대해 깊이 파고드는 질문은 최대 3번까지만. 3번 물었으면 새로운 각도로 전환.
 5. 학생 답변에 짧게 공감(1문장)한 뒤 질문(1문장). 총 2문장 이내. 카톡 반말.
-6. 심문하듯 캐묻기 금지. 정답을 유도하거나 가르치려 들지 마.
+6. 심문하듯 캐묻기 금지. 정답 유도/가르치기 금지.
 7. 학생의 답변을 소재 삼아 가치관([${KW}]: ${kwDef})에 대해 스스로 생각하게 유도하되, "${KW}"이라는 단어를 직접 언급하며 강조하지 마.
-
-[나쁜 질문 예시 - 절대 하지 마]
-- "그런 경험 있어?" (닫힌 질문)
-- "겸손이 중요하다고 생각해?" (닫힌 질문 + 유도)
-- "그래서 겸손해야 한다고 느꼈어?" (닫힌 질문 + 직접 강조)
-
-[좋은 질문 예시]
-- "그때 어떤 생각이 들었어?"
-- "만약 그 상황이 다시 온다면 어떻게 하고 싶어?"
-- "그 경험이 지금의 너한테 어떤 영향을 준 것 같아?"`;
+[나쁜 질문 예시] "그런 경험 있어?", "겸손이 중요하다고 생각해?"
+[좋은 질문 예시] "그때 어떤 생각이 들었어?", "그 경험이 지금의 너한테 어떤 영향을 준 것 같아?"`;
     }
 
     async function apiChat(contents, sys, lastMsg) {
@@ -880,8 +864,58 @@
     async function apiReview(ans, last) {
       try { const r = await fetch(`${W}/api/review`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword: KW, answers: ans, lastChat: last }) }); const d = await r.json(); return d.text || ''; } catch { return ''; }
     }
-
     const useMob = () => { const [m, s] = useState(window.innerWidth <= 860); useEffect(() => { const h = () => s(window.innerWidth <= 860); window.addEventListener('resize', h); return () => window.removeEventListener('resize', h); }, []); return m; };
+
+    // ── Robust PDF download: html2canvas + jsPDF addImage ──
+    async function loadScript(url) {
+      if (document.querySelector(`script[src="${url}"]`)) return;
+      return new Promise((res, rej) => { const s = document.createElement('script'); s.src = url; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+    }
+
+    async function downloadPDF(workerUrl, keyword, answers, review) {
+      // 1. Load libs
+      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js");
+      await loadScript("https://html2canvas.hertzen.com/dist/html2canvas.min.js");
+
+      // 2. Fetch styled HTML from worker
+      const resp = await fetch(`${workerUrl}/api/pdf-html`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ keyword, answers, review })
+      });
+      const htmlStr = await resp.text();
+
+      // 3. Create offscreen container with exact pixel dimensions
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:fixed;left:-9999px;top:0;z-index:-1;';
+      wrap.innerHTML = htmlStr;
+      document.body.appendChild(wrap);
+      const root = wrap.querySelector('#pdf-root') || wrap.firstElementChild;
+
+      // 4. Wait for fonts/rendering
+      await new Promise(r => setTimeout(r, 300));
+
+      // 5. Capture with html2canvas
+      const canvas = await window.html2canvas(root, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#2c2218',
+        width: 1122,
+        height: 793,
+        windowWidth: 1122,
+        windowHeight: 793,
+      });
+
+      document.body.removeChild(wrap);
+
+      // 6. Create PDF and add as image
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF('l', 'mm', 'a4'); // landscape A4: 297x210mm
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210);
+
+      // 7. Save as file download
+      pdf.save(`공부체질_${keyword}_리포트.pdf`);
+    }
 
     const App = () => {
       const mob = useMob();
@@ -925,245 +959,70 @@
         const setLim = type === 'mid' ? setLimit1 : setLimit2;
         const lc = type === 'mid' ? lowCnt1 : lowCnt2;
         const setLc = type === 'mid' ? setLowCnt1 : setLowCnt2;
-
         let updH = h;
         if (msg) { setChatIn(''); updH = [...h, { role: 'user', content: msg }]; setH(updH); }
         setTyping(true);
-
         let contents = updH.map(x => ({ role: x.role === 'user' ? 'user' : 'model', parts: [{ text: x.content }] }));
         while (contents.length > 0 && contents[0].role === 'model') contents.shift();
         if (contents.length === 0 || contents[contents.length - 1].role === 'model') contents.push({ role: 'user', parts: [{ text: '계속해줘.' }] });
-
         const uC = updH.filter(x => x.role === 'user').length;
         const kwDef = DATA.definition.join(' ');
         const sys = buildSysPrompt(kwDef, uC, curLim);
-
         if (updH.length === 0) {
           const seed = type === 'mid'
             ? `[키워드:${KW}] 정의:${kwDef}. 초기생각:"${ans.initialThought}". 퀴즈 q1="${ans.quiz.q1}",q2="${ans.quiz.q2}",q3="${ans.quiz.q3}". 학생의 퀴즈 답변 내용을 바탕으로 학생의 "느낌이나 경험"을 묻는 열린 질문 하나로 자연스럽게 대화를 시작해.`
             : `[키워드:${KW}] 정의:${kwDef}. 마음점검 q1="${ans.check.q1}",q2="${ans.check.q2}",실천="${ans.check.action}". 학생의 답변 내용을 바탕으로 학생의 "생각이나 감정"을 묻는 열린 질문 하나로 자연스럽게 대화를 시작해.`;
           contents = [{ role: 'user', parts: [{ text: seed }] }];
         }
-
         const res = await apiChat(contents, sys, msg);
         if (msg && res.isLowEffort) { const n = lc + 1; setLc(n); if (n >= 2) { curLim += 7; setLim(curLim); setLc(0); } } else if (msg) { setLc(0); }
         setH([...updH, { role: 'assistant', content: res.text }]);
         setTyping(false);
       };
-
       const handleChatKey = (e, type) => { if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); doChat(type); } };
       const extendChat = (type) => { if (type === 'mid') setLimit1(p => p + 7); else setLimit2(p => p + 7); };
 
-      // ── PDF: fetch book-styled HTML from worker, render with jsPDF for direct download ──
       const doPDF = async () => {
         setDl(true);
-        try {
-          // Load jsPDF if needed
-          if (!window.jspdf) {
-            await new Promise((res, rej) => {
-              const s = document.createElement('script');
-              s.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js";
-              s.onload = res; s.onerror = rej;
-              document.head.appendChild(s);
-            });
-          }
-          // Fetch book-styled HTML from worker
-          const r = await fetch(`${W}/api/pdf-html`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword: KW, answers: ans, review }) });
-          const html = await r.text();
-
-          // Create off-screen container
-          const container = document.createElement('div');
-          container.innerHTML = html;
-          // Extract just the body content
-          const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-          if (bodyMatch) container.innerHTML = bodyMatch[1];
-          container.style.cssText = 'position:absolute;left:-9999px;top:0;width:297mm;height:210mm;';
-          document.body.appendChild(container);
-
-          // Apply the styles from the HTML
-          const styleMatch = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
-          if (styleMatch) {
-            const styleEl = document.createElement('style');
-            styleEl.textContent = styleMatch[1];
-            container.prepend(styleEl);
-          }
-
-          const { jsPDF } = window.jspdf;
-          const pdf = new jsPDF('l', 'mm', 'a4'); // landscape
-
-          await pdf.html(container, {
-            callback: doc => {
-              document.body.removeChild(container);
-              doc.save(`공부체질_${KW}_리포트.pdf`);
-            },
-            x: 0, y: 0,
-            width: 297, // A4 landscape width
-            windowWidth: container.scrollWidth,
-            autoPaging: 'text',
-            margin: [0, 0, 0, 0],
-            html2canvas: { scale: 0.24, useCORS: true, letterRendering: true, backgroundColor: '#2c2218' }
-          });
-        } catch (e) {
-          console.error('PDF error:', e);
-          // Fallback: open print dialog with the styled HTML
-          try {
-            const r2 = await fetch(`${W}/api/pdf-html`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword: KW, answers: ans, review }) });
-            const html2 = await r2.text();
-            const w = window.open('', '_blank');
-            if (w) { w.document.write(html2); w.document.close(); setTimeout(() => w.print(), 600); }
-          } catch { window.print(); }
-        }
+        try { await downloadPDF(W, KW, ans, review); }
+        catch (e) { console.error('PDF error:', e); alert('PDF 생성에 실패했습니다. 다시 시도해주세요.'); }
         setDl(false);
       };
 
-      // ── Chat embed ──
       const renderChatEmbed = (type) => {
         const h = type === 'mid' ? chatH1 : chatH2;
         const lim = type === 'mid' ? limit1 : limit2;
         const uC = h.filter(x => x.role === 'user').length;
         const done = uC >= lim && h.length > 0 && h[h.length - 1].role === 'assistant';
-        return (
-          <div className="chat-wrap">
-            <div className="chat-head-bar">
-              <img src={PROF_IMG} alt="" style={{ width: 24, height: 24, borderRadius: '50%', objectFit: 'cover' }} />
-              <h3>김수석 선생님</h3>
-            </div>
-            <div className="turn-bar">
-              <span>대화 진행</span>
-              <div className="turn-dots">{Array.from({ length: Math.min(lim, 14) }).map((_, i) => <div key={i} className={`turn-dot${i < uC ? ' filled' : ''}`} />)}</div>
-            </div>
-            <div className="chat-msgs" ref={chatRef}>
-              {h.map((m, i) => <div key={i} className={`chat-bubble ${m.role === 'user' ? 'user' : 'ai'}`}>{m.content}</div>)}
-              {typing && <div className="chat-bubble typing"><div className="typing-dots"><span /><span /><span /></div></div>}
-            </div>
-            {done ? (
-              <div className="chat-actions-row">
-                <button className="chat-act-btn sec" onClick={() => extendChat(type)}>대화 더 하기</button>
-                <button className="chat-act-btn pri" onClick={() => setStep(s => s + 1)}>다음 페이지 →</button>
-              </div>
-            ) : (
-              <div className="chat-input-row">
-                <input ref={chatInputRef} className="chat-input" value={chatIn} onChange={e => setChatIn(e.target.value)}
-                  onKeyDown={e => handleChatKey(e, type)} placeholder="메시지를 입력하세요..." autoComplete="off" disabled={typing} />
-                <button className="chat-send-btn" onClick={() => doChat(type)} disabled={typing}>➤</button>
-              </div>
-            )}
+        return (<div className="chat-wrap">
+          <div className="chat-head-bar"><img src={PROF_IMG} alt="" style={{ width: 24, height: 24, borderRadius: '50%', objectFit: 'cover' }} /><h3>김수석 선생님</h3></div>
+          <div className="turn-bar"><span>대화 진행</span><div className="turn-dots">{Array.from({ length: Math.min(lim, 14) }).map((_, i) => <div key={i} className={`turn-dot${i < uC ? ' filled' : ''}`} />)}</div></div>
+          <div className="chat-msgs" ref={chatRef}>
+            {h.map((m, i) => <div key={i} className={`chat-bubble ${m.role === 'user' ? 'user' : 'ai'}`}>{m.content}</div>)}
+            {typing && <div className="chat-bubble typing"><div className="typing-dots"><span /><span /><span /></div></div>}
           </div>
-        );
+          {done ? (<div className="chat-actions-row"><button className="chat-act-btn sec" onClick={() => extendChat(type)}>대화 더 하기</button><button className="chat-act-btn pri" onClick={() => setStep(s => s + 1)}>다음 페이지 →</button></div>)
+            : (<div className="chat-input-row"><input ref={chatInputRef} className="chat-input" value={chatIn} onChange={e => setChatIn(e.target.value)} onKeyDown={e => handleChatKey(e, type)} placeholder="메시지를 입력하세요..." autoComplete="off" disabled={typing} /><button className="chat-send-btn" onClick={() => doChat(type)} disabled={typing}>➤</button></div>)}
+        </div>);
       };
 
-      // ── Pages ──
       const pages = useMemo(() => {
         switch (step) {
           case 0: {
-            const c = ans.initialThought.length; const ok = c >= 10;
-            return {
-              left: (<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center' }}>
-                <div style={{ width: 32, height: 2, background: 'var(--gold)', marginBottom: 24 }} />
-                <div className="subtitle">{DATA.subtitle}</div>
-                <h1 style={{ fontSize: '1.7rem', marginBottom: 6, lineHeight: 1.35 }}>{KW}</h1>
-                <div style={{ width: 50, height: 1, background: 'var(--gold)', margin: '18px auto', opacity: 0.5 }} />
-              </div>),
-              right: (<>
-                <RH />
-                <h2>'{KW}', 너는 어떻게 생각해?</h2>
-                <p className="t-small">정답은 없어. 이 단어를 들으면 어떤 느낌이 드는지 자유롭게 적어줘.</p>
-                <div className="answer-area"><div className="answer-inner">
-                  <div className="answer-label"><span className="answer-icon">✎</span> 내가 생각하는 {KW}</div>
-                  <textarea className="answer-textarea" style={{ minHeight: 100 }} placeholder={`예: 나는 ${KW}이(가)...`}
-                    value={ans.initialThought} onChange={e => setAns(p => ({ ...p, initialThought: e.target.value }))} />
-                  <div className="char-info">
-                    <span className={ok ? 'char-ok' : (c > 0 ? 'char-warn' : 'char-default')}>{c}/10자 이상{ok ? ' ✓' : ''}</span>
-                    {c > 0 && !ok && <span className="char-warn">{10 - c}자 더!</span>}
-                  </div>
-                  <div style={{ marginTop: 8, padding: '10px 14px', background: 'var(--accent-glow)', borderRadius: 6 }}>
-                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.72rem', color: 'var(--ink-light)' }}>📝 이 답변은 선생님이 직접 확인해. 정성껏 써줘!</span>
-                  </div>
-                  <div className="submit-row"><button className="submit-btn" disabled={!ok} onClick={() => setStep(1)}>다음으로 →</button></div>
-                </div></div>
-              </>), ln: 1, rn: 2
+            const c = ans.initialThought.length; const ok = c >= 10; return {
+              left: (<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center' }}><div style={{ width: 32, height: 2, background: 'var(--gold)', marginBottom: 24 }} /><div className="subtitle">{DATA.subtitle}</div><h1 style={{ fontSize: '1.7rem', marginBottom: 6, lineHeight: 1.35 }}>{KW}</h1><div style={{ width: 50, height: 1, background: 'var(--gold)', margin: '18px auto', opacity: 0.5 }} /></div>),
+              right: (<><RH /><h2>'{KW}', 너는 어떻게 생각해?</h2><p className="t-small">정답은 없어. 이 단어를 들으면 어떤 느낌이 드는지 자유롭게 적어줘.</p><div className="answer-area"><div className="answer-inner"><div className="answer-label"><span className="answer-icon">✎</span> 내가 생각하는 {KW}</div><textarea className="answer-textarea" style={{ minHeight: 100 }} placeholder={`예: 나는 ${KW}이(가)...`} value={ans.initialThought} onChange={e => setAns(p => ({ ...p, initialThought: e.target.value }))} /><div className="char-info"><span className={ok ? 'char-ok' : (c > 0 ? 'char-warn' : 'char-default')}>{c}/10자 이상{ok ? ' ✓' : ''}</span>{c > 0 && !ok && <span className="char-warn">{10 - c}자 더!</span>}</div><div style={{ marginTop: 8, padding: '10px 14px', background: 'var(--accent-glow)', borderRadius: 6 }}><span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.72rem', color: 'var(--ink-light)' }}>📝 이 답변은 선생님이 직접 확인해. 정성껏 써줘!</span></div><div className="submit-row"><button className="submit-btn" disabled={!ok} onClick={() => setStep(1)}>다음으로 →</button></div></div></div></>), ln: 1, rn: 2
             };
           }
           case 1: return {
-            left: (<>
-              <RH />
-              <h2>{KW}이란 무엇일까?</h2>
-              {DATA.definition.map((line, i) => i <= defIdx && (
-                <React.Fragment key={`d${i}`}>
-                  <p className="t-body" style={{ marginBottom: 8 }}>{line}</p>
-                  {i === defIdx && i < DATA.definition.length - 1 && <div className="click-row"><button className="click-btn" onClick={() => setDefIdx(p => p + 1)}>▶</button></div>}
-                  {i === defIdx && i === DATA.definition.length - 1 && !defDone && <div className="click-row"><button className="click-btn" onClick={() => setDefIdx(p => p + 1)}>▶</button></div>}
-                </React.Fragment>
-              ))}
-              {defDone && impIdx === -1 && <div style={{ textAlign: 'center', marginTop: 12 }}><button className="submit-btn" onClick={() => setImpIdx(0)}>계속 읽기 →</button></div>}
-              {impIdx >= 0 && <>
-                <div style={{ marginTop: 32 }} />
-                <h2>왜 수석은 다르게 볼까?</h2>
-                {DATA.importance.map((line, i) => i <= impIdx && (
-                  <React.Fragment key={`i${i}`}>
-                    <p className="t-body" style={{ marginBottom: 8 }}>{line}</p>
-                    {i === impIdx && i < DATA.importance.length - 1 && <div className="click-row"><button className="click-btn" onClick={() => setImpIdx(p => p + 1)}>▶</button></div>}
-                  </React.Fragment>
-                ))}
-              </>}
-            </>),
-            right: impDone ? (<>
-              <RH /><h2>생각 열기</h2><p className="t-small">배운 내용을 토대로 네 생각을 말해줄래?</p>
-              {DATA.quiz.map(q => {
-                const v = ans.quiz[q.id] || ''; const short = v.length > 0 && v.length < 10; return (
-                  <div key={q.id} className="answer-area"><div className="answer-inner">
-                    <div className="answer-label"><span className="answer-icon">✎</span> {q.label}</div>
-                    <textarea className="answer-textarea" value={v} onChange={e => setAns(p => ({ ...p, quiz: { ...p.quiz, [q.id]: e.target.value } }))} />
-                    <div className="char-info"><span className={v.length >= 10 ? 'char-ok' : (v.length > 0 ? 'char-warn' : 'char-default')}>{v.length}/10자{v.length >= 10 ? ' ✓' : ''}</span>{short && <span className="char-warn">{10 - v.length}자 더!</span>}</div>
-                  </div></div>);
-              })}
-              <div className="submit-row"><button className="submit-btn" disabled={!DATA.quiz.every(q => (ans.quiz[q.id] || '').length >= 10)} onClick={() => { setStep(2); if (mob) setMobP('right'); }}>선생님과 대화 시작 →</button></div>
-            </>) : (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}><p className="t-small" style={{ textAlign: 'center', maxWidth: 200 }}>← 왼쪽 페이지의 내용을 먼저 읽어주세요.</p></div>),
-            ln: 3, rn: 4
+            left: (<><RH /><h2>{KW}이란 무엇일까?</h2>{DATA.definition.map((line, i) => i <= defIdx && (<React.Fragment key={`d${i}`}><p className="t-body" style={{ marginBottom: 8 }}>{line}</p>{i === defIdx && i < DATA.definition.length - 1 && <div className="click-row"><button className="click-btn" onClick={() => setDefIdx(p => p + 1)}>▶</button></div>}{i === defIdx && i === DATA.definition.length - 1 && !defDone && <div className="click-row"><button className="click-btn" onClick={() => setDefIdx(p => p + 1)}>▶</button></div>}</React.Fragment>))}{defDone && impIdx === -1 && <div style={{ textAlign: 'center', marginTop: 12 }}><button className="submit-btn" onClick={() => setImpIdx(0)}>계속 읽기 →</button></div>}{impIdx >= 0 && <><div style={{ marginTop: 32 }} /><h2>왜 수석은 다르게 볼까?</h2>{DATA.importance.map((line, i) => i <= impIdx && (<React.Fragment key={`i${i}`}><p className="t-body" style={{ marginBottom: 8 }}>{line}</p>{i === impIdx && i < DATA.importance.length - 1 && <div className="click-row"><button className="click-btn" onClick={() => setImpIdx(p => p + 1)}>▶</button></div>}</React.Fragment>))}</>}</>),
+            right: impDone ? (<><RH /><h2>생각 열기</h2><p className="t-small">배운 내용을 토대로 네 생각을 말해줄래?</p>{DATA.quiz.map(q => { const v = ans.quiz[q.id] || ''; const short = v.length > 0 && v.length < 10; return (<div key={q.id} className="answer-area"><div className="answer-inner"><div className="answer-label"><span className="answer-icon">✎</span> {q.label}</div><textarea className="answer-textarea" value={v} onChange={e => setAns(p => ({ ...p, quiz: { ...p.quiz, [q.id]: e.target.value } }))} /><div className="char-info"><span className={v.length >= 10 ? 'char-ok' : (v.length > 0 ? 'char-warn' : 'char-default')}>{v.length}/10자{v.length >= 10 ? ' ✓' : ''}</span>{short && <span className="char-warn">{10 - v.length}자 더!</span>}</div></div></div>); })}<div className="submit-row"><button className="submit-btn" disabled={!DATA.quiz.every(q => (ans.quiz[q.id] || '').length >= 10)} onClick={() => { setStep(2); if (mob) setMobP('right'); }}>선생님과 대화 시작 →</button></div></>) : (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}><p className="t-small" style={{ textAlign: 'center', maxWidth: 200 }}>← 왼쪽 페이지의 내용을 먼저 읽어주세요.</p></div>), ln: 3, rn: 4
           };
           case 2: return { left: (<><RH /><h2>나의 답변</h2><div className="t-label">생각 열기</div>{DATA.quiz.map(q => <div key={q.id} className="qa-card"><div className="qa-q">{q.label}</div><div className="qa-a">{ans.quiz[q.id] || '-'}</div></div>)}</>), right: (renderChatEmbed('mid')), ln: 5, rn: 6 };
-          case 3: return {
-            left: (<><RH /><h2>마음 들여다보기</h2><p className="t-small">조금 더 편하게 네 마음을 알려줄래?</p>
-              {DATA.check.map(q => {
-                const v = ans.check[q.id] || ''; const short = v.length > 0 && v.length < 10; return (
-                  <div key={q.id} className="answer-area"><div className="answer-inner">
-                    <div className="answer-label"><span className="answer-icon">✎</span> {q.label}</div>
-                    <textarea className="answer-textarea" value={v} onChange={e => setAns(p => ({ ...p, check: { ...p.check, [q.id]: e.target.value } }))} />
-                    <div className="char-info"><span className={v.length >= 10 ? 'char-ok' : (v.length > 0 ? 'char-warn' : 'char-default')}>{v.length}/10자{v.length >= 10 ? ' ✓' : ''}</span>{short && <span className="char-warn">{10 - v.length}자 더!</span>}</div>
-                  </div></div>);
-              })}
-              <div className="submit-row"><button className="submit-btn" disabled={!DATA.check.every(q => (ans.check[q.id] || '').length >= 10)} onClick={() => { setStep(4); if (mob) setMobP('right'); }}>마지막 대화 시작 →</button></div>
-            </>),
-            right: (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', opacity: 0.6 }}><p className="t-small" style={{ textAlign: 'center', maxWidth: 220 }}>← 왼쪽 페이지의 빈칸을 모두 채워주시면<br />새로운 대화가 시작됩니다.</p></div>),
-            ln: 7, rn: 8
-          };
+          case 3: return { left: (<><RH /><h2>마음 들여다보기</h2><p className="t-small">조금 더 편하게 네 마음을 알려줄래?</p>{DATA.check.map(q => { const v = ans.check[q.id] || ''; const short = v.length > 0 && v.length < 10; return (<div key={q.id} className="answer-area"><div className="answer-inner"><div className="answer-label"><span className="answer-icon">✎</span> {q.label}</div><textarea className="answer-textarea" value={v} onChange={e => setAns(p => ({ ...p, check: { ...p.check, [q.id]: e.target.value } }))} /><div className="char-info"><span className={v.length >= 10 ? 'char-ok' : (v.length > 0 ? 'char-warn' : 'char-default')}>{v.length}/10자{v.length >= 10 ? ' ✓' : ''}</span>{short && <span className="char-warn">{10 - v.length}자 더!</span>}</div></div></div>); })}<div className="submit-row"><button className="submit-btn" disabled={!DATA.check.every(q => (ans.check[q.id] || '').length >= 10)} onClick={() => { setStep(4); if (mob) setMobP('right'); }}>마지막 대화 시작 →</button></div></>), right: (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', opacity: 0.6 }}><p className="t-small" style={{ textAlign: 'center', maxWidth: 220 }}>← 왼쪽 페이지의 빈칸을 모두 채워주시면<br />새로운 대화가 시작됩니다.</p></div>), ln: 7, rn: 8 };
           case 4: return { left: (<><RH /><h2>나의 답변</h2><div className="t-label">마음 들여다보기</div>{DATA.check.map(q => <div key={q.id} className="qa-card"><div className="qa-q">{q.label}</div><div className="qa-a">{ans.check[q.id] || '-'}</div></div>)}</>), right: (renderChatEmbed('final')), ln: 9, rn: 10 };
-          case 5: return {
-            left: (<><RH /><h2>{KW}, 다시 한번.</h2>{DATA.definition.map((l, i) => <p key={i} className="t-body">{l}</p>)}<div style={{ marginTop: 28 }} /><h2>왜 수석은 다르게 볼까?</h2>{DATA.importance.map((l, i) => <p key={i} className="t-body">{l}</p>)}</>),
-            right: (<><RH /><h2>나만의 정의</h2><p className="t-small">배운 내용을 너만의 언어로 정리해봐.</p>
-              <div className="answer-area"><div className="answer-inner"><div className="answer-label"><span className="answer-icon">✎</span> 오늘 배운 {KW}에 대해 어떻게 생각하게 되었어?</div><textarea className="answer-textarea" value={ans.summary.def} onChange={e => setAns(p => ({ ...p, summary: { ...p.summary, def: e.target.value } }))} /></div></div>
-              <div className="answer-area"><div className="answer-inner"><div className="answer-label"><span className="answer-icon">✎</span> 이 키워드를 실천하면 뭐가 가장 좋을 것 같아?</div><textarea className="answer-textarea" value={ans.summary.benefit} onChange={e => setAns(p => ({ ...p, summary: { ...p.summary, benefit: e.target.value } }))} /></div></div>
-              <div className="submit-row"><button className="submit-btn" onClick={() => setStep(6)}>리포트 확인하기 →</button></div>
-            </>), ln: 11, rn: 12
-          };
-          case 6: return {
-            left: (<><RH /><h2>김수석 선생님의 총평</h2>
-              <div className="review-box">{review ? <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.85 }}>{review}</p> : <p style={{ margin: 0, color: 'var(--ink-faint)', fontFamily: 'var(--font-sans)', fontSize: '0.82rem' }}>총평을 작성하고 있어요...</p>}</div>
-              <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>{[{ t: '내가 내린 정의', v: ans.summary.def }, { t: '기대되는 변화', v: ans.summary.benefit }].map(({ t, v }) => (<div key={t} className="qa-card" style={{ flex: 1 }}><div className="qa-q">{t}</div><div className="qa-a">{v || '기록 없음'}</div></div>))}</div>
-            </>),
-            right: (<><RH /><h2>나의 생각 기록</h2>
-              <div className="t-label">첫 번째 생각</div>
-              <div className="qa-card"><div className="qa-q">{KW}, 너는 어떻게 생각해?</div><div className="qa-a">{ans.initialThought || '-'}</div></div>
-              <div className="t-label" style={{ marginTop: 12 }}>생각 열기</div>
-              {DATA.quiz.map((q, i) => <div key={q.id} className="qa-card"><div className="qa-q">Q{i + 1}. {q.label}</div><div className="qa-a">{ans.quiz[q.id] || '-'}</div></div>)}
-              <div className="t-label" style={{ marginTop: 12 }}>마음 들여다보기</div>
-              {DATA.check.map((q, i) => <div key={q.id} className="qa-card"><div className="qa-q">Q{i + 1}. {q.label}</div><div className="qa-a">{ans.check[q.id] || '-'}</div></div>)}
-              <div style={{ textAlign: 'center', marginTop: 20, paddingTop: 14, borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-                <p style={{ fontStyle: 'italic', fontSize: '0.85rem', color: 'var(--ink-light)', margin: 0 }}>"너의 가능성은 이미 빛나고 있어."</p>
-              </div>
-              <button className="dl-btn" disabled={dl} onClick={doPDF}>{dl ? '저장 중...' : '📄 PDF 다운로드'}</button>
-            </>), ln: 13, rn: 14
-          };
+          case 5: return { left: (<><RH /><h2>{KW}, 다시 한번.</h2>{DATA.definition.map((l, i) => <p key={i} className="t-body">{l}</p>)}<div style={{ marginTop: 28 }} /><h2>왜 수석은 다르게 볼까?</h2>{DATA.importance.map((l, i) => <p key={i} className="t-body">{l}</p>)}</>), right: (<><RH /><h2>나만의 정의</h2><p className="t-small">배운 내용을 너만의 언어로 정리해봐.</p><div className="answer-area"><div className="answer-inner"><div className="answer-label"><span className="answer-icon">✎</span> 오늘 배운 {KW}에 대해 어떻게 생각하게 되었어?</div><textarea className="answer-textarea" value={ans.summary.def} onChange={e => setAns(p => ({ ...p, summary: { ...p.summary, def: e.target.value } }))} /></div></div><div className="answer-area"><div className="answer-inner"><div className="answer-label"><span className="answer-icon">✎</span> 이 키워드를 실천하면 뭐가 가장 좋을 것 같아?</div><textarea className="answer-textarea" value={ans.summary.benefit} onChange={e => setAns(p => ({ ...p, summary: { ...p.summary, benefit: e.target.value } }))} /></div></div><div className="submit-row"><button className="submit-btn" onClick={() => setStep(6)}>리포트 확인하기 →</button></div></>), ln: 11, rn: 12 };
+          case 6: return { left: (<><RH /><h2>김수석 선생님의 총평</h2><div className="review-box">{review ? <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.85 }}>{review}</p> : <p style={{ margin: 0, color: 'var(--ink-faint)', fontFamily: 'var(--font-sans)', fontSize: '0.82rem' }}>총평을 작성하고 있어요...</p>}</div><div style={{ display: 'flex', gap: 8, marginTop: 16 }}>{[{ t: '내가 내린 정의', v: ans.summary.def }, { t: '기대되는 변화', v: ans.summary.benefit }].map(({ t, v }) => (<div key={t} className="qa-card" style={{ flex: 1 }}><div className="qa-q">{t}</div><div className="qa-a">{v || '기록 없음'}</div></div>))}</div></>), right: (<><RH /><h2>나의 생각 기록</h2><div className="t-label">첫 번째 생각</div><div className="qa-card"><div className="qa-q">{KW}, 너는 어떻게 생각해?</div><div className="qa-a">{ans.initialThought || '-'}</div></div><div className="t-label" style={{ marginTop: 12 }}>생각 열기</div>{DATA.quiz.map((q, i) => <div key={q.id} className="qa-card"><div className="qa-q">Q{i + 1}. {q.label}</div><div className="qa-a">{ans.quiz[q.id] || '-'}</div></div>)}<div className="t-label" style={{ marginTop: 12 }}>마음 들여다보기</div>{DATA.check.map((q, i) => <div key={q.id} className="qa-card"><div className="qa-q">Q{i + 1}. {q.label}</div><div className="qa-a">{ans.check[q.id] || '-'}</div></div>)}<div style={{ textAlign: 'center', marginTop: 20, paddingTop: 14, borderTop: '1px solid rgba(0,0,0,0.06)' }}><p style={{ fontStyle: 'italic', fontSize: '0.85rem', color: 'var(--ink-light)', margin: 0 }}>"너의 가능성은 이미 빛나고 있어."</p></div><button className="dl-btn" disabled={dl} onClick={doPDF}>{dl ? '저장 중...' : '📄 PDF 다운로드'}</button></>), ln: 13, rn: 14 };
           default: return { left: null, right: null, ln: 1, rn: 2 };
         }
       }, [step, ans, defIdx, impIdx, defDone, impDone, review, dl, chatH1, chatH2, typing, chatIn, limit1, limit2, mob]);
@@ -1179,20 +1038,13 @@
             <div className="book-edge-right" />
             {mob && mobP === 'right' && <button className="mob-nav mob-nav-l" onClick={() => setMobP('left')}>‹</button>}
             {mob && mobP === 'left' && step > 0 && <button className="mob-nav mob-nav-r" onClick={() => setMobP('right')}>›</button>}
-            {showL && <div className="page-wrapper page-left" style={!showR ? { flex: 1 } : undefined}>
-              <div className="page">{pages.left}</div>
-              <div className="page-num">{pages.ln}</div>
-            </div>}
-            {showR && <div className="page-wrapper page-right" style={!showL ? { flex: 1 } : undefined}>
-              <div className="page">{pages.right}</div>
-              <div className="page-num">{pages.rn}</div>
-            </div>}
+            {showL && <div className="page-wrapper page-left" style={!showR ? { flex: 1 } : undefined}><div className="page">{pages.left}</div><div className="page-num">{pages.ln}</div></div>}
+            {showR && <div className="page-wrapper page-right" style={!showL ? { flex: 1 } : undefined}><div className="page">{pages.right}</div><div className="page-num">{pages.rn}</div></div>}
           </div>
         </div>
         <div className="book-footer">ⓒ 수석의방</div>
       </>);
     };
-
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
 </body>
